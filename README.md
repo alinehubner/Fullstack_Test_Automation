@@ -46,11 +46,20 @@ Cada tipo de teste foi separado em pastas para facilitar o entendimento e a manu
 ├── package.json
 └── package-lock.json
 └── README.md
-├── load/
-│   ├──scripts/                   # Scripts de teste k6
-│   ├──results/                   # Resultados e relatórios (não versionado)
-│   ├──run-load-tests.ps1
-│   └── README.md
+load/
+├── scripts/
+│   ├── main.js
+│   ├── scenarios/
+│   │   └── bookingFlow.js
+│   ├── requests/
+│   │   └── bookingApi.js
+│   └── utils/
+│       └── config.js
+├── results/                     # ignorado no git
+│   ├── fixed/                   # criado no momento da execucao do teste
+│   ├── ramping/                 # criado no momento da execucao do teste
+├── run-load-tests.ps1
+└── README.md
 
 ```
 
