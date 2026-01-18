@@ -141,8 +141,6 @@ Esse relatório não é versionado, pois é gerado a cada execução.
 
 Os testes de carga foram implementados utilizando o **k6**, com o objetivo de validar o comportamento da API sob múltiplas requisições simultâneas.
 
-A ideia aqui não é simular um cenário extremo, mas sim um **teste inicial de carga (smoke load)**, suficiente para observar estabilidade, tempo de resposta e taxa de erro.
-
 ---
 
 ### 🎯 Objetivo do teste
