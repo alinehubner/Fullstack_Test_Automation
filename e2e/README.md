@@ -29,8 +29,8 @@ Para executar este projeto localmente, é necessário:
 
 - Node.js (versão LTS)
 - npm
-- PowerShell (Windows)
 - Git
+- PowerShell (Windows)
 
 ## ⚙️ Instalação
 No terminal, entre na pasta `e2e/` e instale as dependências:
