@@ -88,7 +88,7 @@ As configurações das APIs são controladas por environments do Postman, inclui
 - Headers
 - Variáveis dinâmicas
 
-##📌 Recomendações:
+## 📌 Recomendações:
 
 - Use arquivos de exemplo (```*.example.json```) quando houver dados sensíveis
 - Evite versionar credenciais reais
