@@ -47,7 +47,7 @@ Write-Host "==============================================="
 # (JSON/HTML serao gerados automaticamente pelo handleSummary())
 k6 run $k6Script | Tee-Object -FilePath $logFile
 
-Write-Host "`nExecucao finalizada."
+Write-Host "Execucao finalizada."
 Write-Host "Evidencias geradas:"
 Write-Host "- Log TXT:      $logFile"
 
@@ -63,4 +63,4 @@ if (Test-Path $htmlFile) {
   Write-Host "- Report HTML:  nao encontrado - verifique se o handleSummary() esta no script k6"
 }
 
-Write-Host "`nDica: o diretorio load/results/ deve ficar no .gitignore (nao versionar evidencias)."
+Write-Host "Dica: o diretorio load/results/ deve ficar no .gitignore (nao versionar evidencias)."
