@@ -18,7 +18,7 @@ e2e/
 │   └── videos/               # Artefatos (não versionado)
 ├── .cypress-cucumber-preprocessorrc.js
 ├── cypress.config.js
-├── cypress.env.example.json
+├── cypress.env.example.json  # Exemplo (versionado)
 ├── cypress.env.json          # NÃO versionado
 ├── package.json
 └── package-lock.json
