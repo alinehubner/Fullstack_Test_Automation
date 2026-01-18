@@ -43,7 +43,7 @@ npx newman run collections/<collection>.json `
   -e environments/<environment>.json
 ```
 
-####🚀 Scripts disponíveis (recomendado)
+#### 🚀 Scripts disponíveis (recomendado)
 
 Para facilitar a execução, utilize scripts do ```package.json```:
 
