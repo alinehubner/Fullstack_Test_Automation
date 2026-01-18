@@ -57,17 +57,17 @@ Edite o ```cypress.env.json``` e informe os valores esperados pelo projeto (ex.:
 ⚠️ O arquivo ```cypress.env.json``` não é versionado por conter dados sensíveis.
 
 ## ▶️ Executando os testes
-#### 🖥️ Abrir interface do Cypress (modo interativo)
+### 🖥️ Abrir interface do Cypress (modo interativo)
 ```
 npx cypress open
 ```
 
-#### 🤖 Executar em modo headless (terminal / CI)
+### 🤖 Executar em modo headless (terminal / CI)
 ```
 npx cypress run
 ```
 
-#### 📸 Evidências / Artefatos
+### 📸 Evidências / Artefatos
 
 Durante a execução, o Cypress pode gerar automaticamente:
 
