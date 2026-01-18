@@ -180,6 +180,44 @@ k6 run load/scripts/restfulbooker-smoke.js --summary-export load/results/summary
 
 ```
 
+### 📄 Evidência gerada
+
+Ao final da execução, o k6 gera:
+
+métricas no output do terminal
+
+um arquivo de resumo em formato JSON
+
+Arquivo gerado:
+
+load/results/summary-smoke.json
+
+
+O diretório load/results/ não é versionado, pois os arquivos são gerados a cada execução.
+
+### 🧠 Observações
+
+Este teste foi estruturado como um primeiro passo em testes de performance, priorizando:
+
+simplicidade
+
+clareza
+
+facilidade de execução
+
+Ele pode ser facilmente expandido para cenários mais complexos, como ramp-up, stress test ou integração com pipelines de CI/CD.
+
+
+### ✅ Por que esse trecho funciona bem
+- explica o *porquê* do k6 existir no projeto
+- não assusta quem lê
+- mostra que você entende o objetivo do teste
+- não finge maturidade que você não quer vender
+
+Se quiser, posso:
+- ajustar o texto para **inglês**
+- ou ajudar a criar o **script k6** exatamente alinhado com esse README
+
 ---
 
 ## ✅ Boas práticas adotadas
