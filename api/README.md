@@ -19,7 +19,7 @@ O objetivo é validar se o endpoint continua funcionando como esperado: response
 └──README.md
 
 ```
-📎 Observação: o diretório ```results/``` é gerado automaticamente a cada execução e não é versionado.
+📎 Observação: o diretório ```results/newman``` é gerado automaticamente a cada execução e não é versionado.
 
 ## 🔧 Pré-requisitos
 Para executar este projeto localmente, é necessário:
