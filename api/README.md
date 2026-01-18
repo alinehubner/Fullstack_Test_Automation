@@ -13,6 +13,7 @@ api/
 │   │   ├── collections
 │   │   └── environments
 │   └── run-api-tests.ps1
+└──README.md
 ```
 
 ## 🔧 Pré-requisitos
