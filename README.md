@@ -124,12 +124,9 @@ O que o pipeline executa
 Relatórios e evidências
 
 Os resultados das execuções são anexados como Artifacts em cada execução do workflow, incluindo:
-
-Screenshots e vídeos do Cypress
-
-Relatórios do Newman
-
-Saídas e resumos do k6
+- Screenshots e vídeos do Cypress
+- Relatórios do Newman
+- Saídas e resumos do k6
 
 
 ### 📄 Evidências geradas
