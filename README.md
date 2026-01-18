@@ -32,7 +32,7 @@ Cada tipo de teste foi separado em pastas para facilitar o entendimento e a manu
 ```
 
 
-📎 **Observação:** o diretório `reports/` é gerado automaticamente a cada execução e não é versionado.
+📎 **Observação:** diretórios de relatórios (`screenshots`, `videos`, `results`, etc.) são gerados automaticamente a cada execução e **não são versionados**.
 
 ---
 
@@ -40,10 +40,11 @@ Cada tipo de teste foi separado em pastas para facilitar o entendimento e a manu
 
 Para executar este projeto localmente, é necessário:
 
-- Node.js (versão LTS)
-- npm
-- PowerShell (Windows)
-- Git
+- **Node.js** (versão LTS)
+- **npm**
+- **Git**
+- **PowerShell** (Windows)
+- **k6** (para testes de carga)
 
 ---
 
