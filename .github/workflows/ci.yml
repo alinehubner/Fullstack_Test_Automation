@@ -1,0 +1,137 @@
+# Pipeline de CI:
+# Executa testes E2E (Cypress), API (Newman) e Carga (k6)
+name: CI - E2E + API + Load
+
+# Define quando o pipeline deve rodar
+# - push na branch main
+# - pull request para main
+# - execucao manual pelo GitHub
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch: {}
+
+jobs:
+  e2e:
+    # Job responsavel pelos testes E2E com Cypress
+    name: E2E (Cypress)
+    runs-on: ubuntu-latest
+
+    # Define o diretorio padrao para os comandos run
+    defaults:
+      run:
+        working-directory: e2e
+
+    steps:
+      # Faz o checkout do codigo do repositorio
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Instala o Node.js e configura cache do npm
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: e2e/package-lock.json
+
+      # Instala as dependencias do projeto E2E
+      - name: Install dependencies
+        run: npm ci
+
+      # Cria o arquivo cypress.env.json a partir do example
+      - name: Prepare cypress.env.json
+        run: |
+          if [ -f "cypress.env.example.json" ]; then
+            cp cypress.env.example.json cypress.env.json
+          fi
+
+      # Executa os testes Cypress em modo headless
+      - name: Run Cypress
+        run: npx cypress run
+
+      # Faz upload das evidencias do Cypress (videos e screenshots)
+      - name: Upload Cypress artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-e2e-artifacts
+          path: |
+            e2e/cypress/videos
+            e2e/cypress/screenshots
+          if-no-files-found: ignore
+
+  api:
+    # Job responsavel pelos testes de API com Postman/Newman
+    name: API (Newman)
+    runs-on: ubuntu-latest
+
+    steps:
+      # Faz o checkout do codigo do repositorio
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Instala o Node.js necessario para rodar o Newman
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # Instala o Newman e o reporter HTML
+      - name: Install Newman
+        run: npm install -g newman newman-reporter-htmlextra
+
+      # Executa a collection do Postman com ambiente example
+      - name: Run Newman
+        run: |
+          mkdir -p api/results
+          newman run "api/postman/collections/Restful-Booker.postman_collection.json" \
+            -e "api/postman/environments/restful-booker-env.example.json" \
+            --reporters cli,htmlextra,json \
+            --reporter-htmlextra-export "api/results/newman-report.html" \
+            --reporter-json-export "api/results/newman-report.json"
+
+      # Faz upload dos relatorios gerados pelo Newman
+      - name: Upload Newman artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-api-artifacts
+          path: api/results
+          if-no-files-found: ignore
+
+  load:
+    # Job responsavel pelos testes de carga com k6
+    name: Load (k6)
+    runs-on: ubuntu-latest
+
+    steps:
+      # Faz o checkout do codigo do repositorio
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Instala o k6 na maquina do runner
+      - name: Setup k6
+        uses: grafana/setup-k6-action@v1
+
+      # Executa os testes de carga:
+      # - fixed: carga fixa (baseline)
+      # - ramping: carga gradual
+      # continue-on-error e usado pois APIs publicas podem ser instaveis
+      - name: Run k6 (fixed + ramping)
+        continue-on-error: true
+        run: |
+          mkdir -p load/results/fixed load/results/ramping
+          k6 run -e SCENARIO=fixed -e VUS=5 -e DURATION=30s load/scripts/main.js
+          k6 run -e SCENARIO=ramping load/scripts/main.js
+
+      # Faz upload dos relatorios HTML e JSON do k6
+      - name: Upload k6 artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: k6-load-artifacts
+          path: load/results
+          if-no-files-found: ignore
