@@ -1,28 +1,22 @@
-# Fullstack Test Automation
+# 🧪 Fullstack Test Automation
 
-Repositório criado para demonstração de automação de testes em diferentes níveis:
+Este repositório foi criado como parte de um **teste técnico** com o objetivo de demonstrar conhecimentos práticos em **automação de testes**, organização de projeto e execução reprodutível.
 
-- **E2E**: testes end-to-end com Cypress  
-- **API**: testes de API utilizando Postman + Newman  
-- **Load**: testes de carga com k6 (em progresso)
-
-O objetivo é apresentar uma abordagem organizada, reprodutível e próxima da realidade de projetos profissionais.
+A proposta aqui não é apenas “rodar testes”, mas mostrar **como estruturar**, **executar** e **explicar** testes em diferentes níveis, de forma clara e próxima da realidade do dia a dia em QA.
 
 ---
 
-## Pré-requisitos
+## 📌 O que você vai encontrar neste projeto
 
-- Node.js (LTS)
-- npm
-- PowerShell (para execução do script de API no Windows)
+Este repositório contempla três tipos de testes:
+
+- ✅ **E2E (End-to-End)** — com Cypress  
+- 🔌 **API Tests** — com Postman + Newman  
+- 📊 **Load Tests** — com k6 *(estrutura preparada)*  
+
+Cada tipo de teste foi separado em pastas para facilitar o entendimento e a manutenção.
 
 ---
 
-## E2E Tests (Cypress)
+## 🗂️ Estrutura do Projeto
 
-Os testes E2E foram desenvolvidos com Cypress e estão localizados na estrutura principal do projeto.
-
-### Executar os testes E2E
-```bash
-npm ci
-npm run cy:run
