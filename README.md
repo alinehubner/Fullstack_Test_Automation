@@ -107,7 +107,7 @@ A collection foi criada no **Postman**, com validações automatizadas por meio 
 
 ---
 
-▶️ Executar os testes de API
+### ▶️ Executar os testes de API
 
 ```
 npm ci
@@ -128,7 +128,7 @@ gera evidência em formato HTML
 
 ---
 
-📄 Evidência gerada
+### 📄 Evidência gerada
 
 Após a execução, um relatório HTML é gerado automaticamente em:
 
@@ -141,7 +141,7 @@ Esse relatório não é versionado, pois é gerado a cada execução.
 
 ---
 
-📊 Testes de Carga (k6)
+## 📊 Testes de Carga (k6)
 
 A estrutura para testes de carga utilizando k6 já está preparada no diretório load/.
 
@@ -149,7 +149,7 @@ Implementação em andamento.
 
 ---
 
-✅ Boas práticas adotadas
+## ✅ Boas práticas adotadas
 
 Separação clara entre testes E2E, API e Load
 
@@ -163,7 +163,7 @@ Documentação simples e objetiva
 
 ---
 
-📝 Considerações finais
+## 📝 Considerações finais
 
 Este projeto foi construído com foco em:
 
