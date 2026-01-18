@@ -51,6 +51,10 @@ jobs:
       # Executa os testes Cypress em modo headless
       - name: Run Cypress
         run: npx cypress run
+        env:
+          CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
+          CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
+
 
       # Faz upload das evidencias do Cypress (videos e screenshots)
       - name: Upload Cypress artifacts
