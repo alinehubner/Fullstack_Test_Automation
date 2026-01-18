@@ -23,3 +23,11 @@ e2e/
 ├── package.json
 └── package-lock.json
 ```
+
+## 🔧 Pré-requisitos
+Para executar este projeto localmente, é necessário:
+
+- Node.js (versão LTS)
+- npm
+- PowerShell (Windows)
+- Git
