@@ -178,9 +178,3 @@ proximidade com cenários reais de QA
 Ele não tem como objetivo ser um framework completo, mas sim demonstrar entendimento do processo, boas decisões técnicas e capacidade de explicar o que foi feito.
 
 ```
-
----
-Quando quiser, seguimos **direto para o k6** 🚀
-
-
-```
