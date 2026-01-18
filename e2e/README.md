@@ -78,4 +78,25 @@ Durante a execução, o Cypress pode gerar automaticamente:
 
 🧹 Esses diretórios são considerados artefatos e não são versionados.
 
+## 🧩 Troubleshooting
+### ❌ “Command not found” / Cypress não abre
+
+Confirme que você está dentro da pasta ```e2e/``` e reinstale:
+```
+cd e2e
+npm ci
+```
+
+###❌ Erro de variáveis / login / baseUrl
+
+Confirme a existência do arquivo:
+
+- ```e2e/cypress.env.json```
+
+Compare as chaves com ```cypress.env.example.json``` e preencha os valores.
+
+### ▶️ Rodar apenas um spec (opcional)
+```
+npx cypress run --spec "cypress/e2e/**/*.cy.*"
+```
 
