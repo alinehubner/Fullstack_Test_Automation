@@ -14,3 +14,14 @@ load/
 ├── results/ # Resultados e relatórios (não versionado)
 └── README.md
 ```
+
+## 🔧 Pré-requisitos
+Para executar este projeto localmente, é necessário:
+
+- **k6** instalado
+- **Git**
+- **PowerShell** (Windows)
+
+### Verificar instalação do k6
+```powershell
+k6 version
