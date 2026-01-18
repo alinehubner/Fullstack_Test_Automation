@@ -205,29 +205,21 @@ Este teste pode ser expandido futuramente para cenários mais avançados (ramp-u
 
 ## ✅ Boas práticas adotadas
 
-Separação clara entre testes E2E, API e Load
-
-Nenhuma variável sensível versionada
-
-Execução reprodutível via scripts
-
-Organização pensada para facilitar CI/CD
-
-Documentação simples e objetiva
+- Separação clara entre testes E2E, API e Load
+- Nenhuma variável sensível versionada
+- Execução reprodutível via scripts
+- Organização pensada para facilitar CI/CD
+- Documentação simples e objetiva
 
 ---
 
 ## 📝 Considerações finais
 
-Este projeto foi construído com foco em:
-
-clareza
-
-organização
-
-aprendizado
-
-proximidade com cenários reais de QA
+- Este projeto foi construído com foco em:
+- Clareza
+- Organização
+- Aprendizado
+- Proximidade com cenários reais de QA
 
 Ele não tem como objetivo ser um framework completo, mas sim demonstrar entendimento do processo, boas decisões técnicas e capacidade de explicar o que foi feito.
 
