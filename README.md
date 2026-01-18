@@ -186,7 +186,7 @@ Ao final da execução, o script gera as seguintes evidências dentro de load/re
 
 1. Log do terminal (TXT)
 Arquivo com a saída completa do k6 (métricas + resumo)
-Ex.: k6-output-YYYYMMDD-HHMMSS.txt
+Ex.: ```k6-output-YYYYMMDD-HHMMSS.txt```
 
 2. Resumo da execução (Summary JSON)
 Um resumo com métricas agregadas (útil para auditoria/CI)
