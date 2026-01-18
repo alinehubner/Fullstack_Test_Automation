@@ -86,8 +86,6 @@ npm ci
 
 Os testes de carga foram implementados utilizando o **k6**, com o objetivo de validar o comportamento da API sob múltiplas requisições simultâneas.
 
----
-
 ### ▶️ Executar os testes de carga
 
 ```
@@ -95,11 +93,44 @@ k6 run load/scripts/restfulbooker-smoke.js --summary-export load/results/summary
 
 ```
 
-📌 Instruções completas de instalação, configuração e execução estão documentadas nos READMEs de cada módulo:
+---
+
+## 📌 Instruções completas de instalação, configuração e execução estão documentadas nos READMEs de cada módulo:
 
 - e2e/README.md
 - api/README.md
 - load/README.md
+
+---
+
+## 🤖 CI/CD (GitHub Actions)
+
+O pipeline de integração contínua está definido em:
+
+```
+.github/workflows/ci.yml
+```
+
+Como executar o pipeline
+
+- Automático: a cada ```push``` ou ```pull request``` na branch ```main```
+- Manual: GitHub → aba Actions → workflow CI - Tests → Run workflow
+
+O que o pipeline executa
+
+- Testes E2E (Cypress)
+- Testes de API (Newman)
+- Testes de Carga (k6)
+
+Relatórios e evidências
+
+Os resultados das execuções são anexados como Artifacts em cada execução do workflow, incluindo:
+
+Screenshots e vídeos do Cypress
+
+Relatórios do Newman
+
+Saídas e resumos do k6
 
 
 ### 📄 Evidências geradas
