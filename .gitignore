@@ -1,8 +1,9 @@
 #arquivos do projeto e2e - cypress
-node_modules/
-cypress/videos/
-cypress/screenshots/
-cypress.env.json
+e2e/node_modules/
+e2e/cypress/videos/
+e2e/cypress/screenshots/
+e2e/cypress.env.json
 
 #arquivos do Newman 
 reports/
+load/results/
