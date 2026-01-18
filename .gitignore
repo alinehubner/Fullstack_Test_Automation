@@ -1,11 +1,13 @@
-#arquivos do projeto e2e - cypress
-e2e/node_modules/
-e2e/cypress/videos/
-e2e/cypress/screenshots/
-e2e/cypress.env.json
+# Node (qualquer subprojeto)
+**/node_modules/
 
-#arquivos do Newman 
+# Cypress
+**/cypress/videos/
+**/cypress/screenshots/ 
+**/cypress.env.json
+
+# Newman
 api/results/
 
-#arquivos do K6
+# k6
 load/results/
