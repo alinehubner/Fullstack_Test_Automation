@@ -22,43 +22,11 @@ Cada tipo de teste foi separado em pastas para facilitar o entendimento e a manu
 
 ```
 
-├── api/
-│   ├── postman/
-│   │   ├── collections/
-│   │   └── environments/
-│   ├── results/
-│   │   ├──  newman/              # Resultados e relatórios (não versionado)
-├── run-api-tests.ps1
-└──README.md
-├── e2e/
-│   ├── cypress/
-│   │   ├── e2e/                  # Cenários E2E
-│   │   ├── fixtures/             # Massas de teste
-│   │   ├── pageObjects/          # Page Objects
-│   │   ├── support/              # Commands e setup global
-│   │   ├── screenshots/          # Artefatos (não versionado)
-│   │   ├── videos/               # Artefatos (não versionado)
-│   ├── nodes_modules/            # NÃO versionado
-├── .cypress-cucumber-preprocessorrc.js
-├── cypress.config.js
-├── cypress.env.example.json      # Exemplo (versionado)
-├── cypress.env.json              # NÃO versionado
-├── package.json
-└── package-lock.json
-└── README.md
-load/
-├── scripts/
-│   ├── main.js
-│   ├── scenarios/
-│   │   └── bookingFlow.js
-│   ├── requests/
-│   │   └── bookingApi.js
-│   └── utils/
-│       └── config.js
-├── results/                      # ignorado no git
-│   ├── fixed/                    # criado no momento da execucao do teste
-│   ├── ramping/                  # criado no momento da execucao do teste
-├── run-load-tests.ps1
+├── e2e/                 # Testes E2E (Cypress)
+├── api/                 # Testes de API (Postman / Newman)
+├── load/                # Testes de Carga (k6)
+├── .github/
+│ └── workflows/ci.yml   # Pipeline CI/CD (GitHub Actions)
 └── README.md
 
 ```
