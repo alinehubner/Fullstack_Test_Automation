@@ -1,4 +1,8 @@
+#arquivos do projeto e2e - cypress
 node_modules/
 cypress/videos/
 cypress/screenshots/
 cypress.env.json
+
+#arquivos do Newman 
+reports/

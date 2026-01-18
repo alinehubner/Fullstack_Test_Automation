@@ -1,0 +1,406 @@
+{
+  "info": {
+    "_postman_id": "bedd9e39-b13e-4644-98f7-93792c9b4943",
+    "name": "Restful-Booker",
+    "description": "StartFragmentCollection de testes para a API pública Restful-Booker.  \n  \nFluxo executável via Runner/Newman reutilizando variáveis de environment: `baseUrl`, `token`, `bookingId`.  \n  \nToken é gerado em `Auth - Create Token` e armazenado automaticamente.  \n`bookingId` é gerado em `Booking - Create` e reutilizado nas etapas seguintes (Get/Update/Delete).  \n  \nApós Delete, o GET valida `404 Not Found`.EndFragment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22780263",
+    "_collection_link": "https://go.postman.co/collection/22780263-bedd9e39-b13e-4644-98f7-93792c9b4943?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Ping - Health Check",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200 or 201\", () => {\r",
+                  "  pm.expect([200, 201]).to.include(pm.response.code);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response time < 2000ms\", () => {\r",
+                  "  pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ping"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Smoke check da API (`/ping`)"
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Create Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {\r",
+                  "  pm.expect(pm.response.code).to.equal(200);\r",
+                  "});\r",
+                  "\r",
+                  "const json = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Token exists\", () => {\r",
+                  "  pm.expect(json.token).to.be.a(\"string\").and.not.be.empty;\r",
+                  "});\r",
+                  "\r",
+                  "// salva token no environment\r",
+                  "pm.environment.set(\"token\", json.token);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Gera token e salva em .`{.{token}.}.`"
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Booking - Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {\r",
+                  "  pm.expect(pm.response.code).to.equal(200);\r",
+                  "});\r",
+                  "\r",
+                  "const json = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"bookingid exists\", () => {\r",
+                  "  pm.expect(json.bookingid).to.be.a(\"number\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"booking object exists\", () => {\r",
+                  "  pm.expect(json.booking).to.be.an(\"object\");\r",
+                  "});\r",
+                  "\r",
+                  "// salva o bookingId no environment\r",
+                  "pm.environment.set(\"bookingId\", json.bookingid);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"firstname\": \"Aline\",\r\n  \"lastname\": \"Hubner\",\r\n  \"totalprice\": 111,\r\n  \"depositpaid\": true,\r\n  \"bookingdates\": {\r\n    \"checkin\": \"2026-02-01\",\r\n    \"checkout\": \"2026-02-05\"\r\n  },\r\n  \"additionalneeds\": \"Breakfast\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/booking",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "booking"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Booking - Get By Id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {\r",
+                  "  pm.expect(pm.response.code).to.equal(200);\r",
+                  "});\r",
+                  "\r",
+                  "const b = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Has required fields\", () => {\r",
+                  "  pm.expect(b).to.have.property(\"firstname\");\r",
+                  "  pm.expect(b).to.have.property(\"lastname\");\r",
+                  "  pm.expect(b).to.have.property(\"totalprice\");\r",
+                  "  pm.expect(b).to.have.property(\"depositpaid\");\r",
+                  "  pm.expect(b).to.have.property(\"bookingdates\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"bookingdates has checkin/checkout\", () => {\r",
+                  "  pm.expect(b.bookingdates).to.have.property(\"checkin\");\r",
+                  "  pm.expect(b.bookingdates).to.have.property(\"checkout\");\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/booking/{{bookingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "booking",
+                "{{bookingId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Booking - Update",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {\r",
+                  "  pm.expect(pm.response.code).to.equal(200);\r",
+                  "});\r",
+                  "\r",
+                  "const b = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Updated fields applied\", () => {\r",
+                  "  pm.expect(b.totalprice).to.equal(222);\r",
+                  "  pm.expect(b.depositpaid).to.equal(false);\r",
+                  "  pm.expect(b.additionalneeds).to.equal(\"Late checkout\");\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"firstname\": \"Aline\",\r\n  \"lastname\": \"Hubner\",\r\n  \"totalprice\": 222,\r\n  \"depositpaid\": false,\r\n  \"bookingdates\": {\r\n    \"checkin\": \"2026-02-10\",\r\n    \"checkout\": \"2026-02-12\"\r\n  },\r\n  \"additionalneeds\": \"Late checkout\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/booking/{{bookingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "booking",
+                "{{bookingId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Booking - Delete",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201 or 200\", () => {\r",
+                  "  pm.expect([200, 201]).to.include(pm.response.code);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/booking/{{bookingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "booking",
+                "{{bookingId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Booking - Get By Id (After Delete)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 404 after delete\", () => {\r",
+                  "  pm.expect(pm.response.code).to.equal(404);\r",
+                  "});\r",
+                  "\r",
+                  "pm.environment.unset(\"bookingId\");\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/booking/{{bookingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "booking",
+                "{{bookingId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "CRUD completo usando `{{bookingId}}` e auth herdada do folder",
+      "auth": {
+        "type": "apikey",
+        "apikey": [
+          {
+            "key": "value",
+            "value": "token={{token}}",
+            "type": "string"
+          },
+          {
+            "key": "key",
+            "value": "Cookie",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
