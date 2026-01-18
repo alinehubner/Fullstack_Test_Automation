@@ -128,6 +128,7 @@ Os resultados das execuções são anexados como Artifacts em cada execução do
 - Relatórios do Newman
 - Saídas e resumos do k6
 
+---
 
 ### 📄 Evidências geradas
 
@@ -145,7 +146,7 @@ Ex.: ```summary-YYYYMMDD-HHMMSS.json```
 Relatório visual gerado a partir do JSON bruto do k6
 Ex.: ```k6-report-YYYYMMDD-HHMMSS.html```
 
-O diretório load/results/ não é versionado, pois os arquivos são gerados a cada execução.
+O diretório ```load/results/``` não é versionado, pois os arquivos são gerados a cada execução.
 
 --- 
 
