@@ -39,11 +39,11 @@ No terminal, entre na pasta `e2e/` e instale as dependências:
 cd e2e
 npm ci
 ```
-💡 Recomendado: npm ci (garante versões consistentes com base no package-lock.json).
+💡 Recomendado: npm ci (garante versões consistentes com base no ```package-lock.json```).
 
 ## 🔐 Configuração de ambiente
 
-Este projeto utiliza variáveis locais no arquivo cypress.env.json.
+Este projeto utiliza variáveis locais no arquivo ```cypress.env.json```.
 
 1) Criar o arquivo a partir do exemplo
 ```
@@ -52,9 +52,9 @@ copy cypress.env.example.json cypress.env.json
 
 2) Preencher as variáveis necessárias
 
-Edite o cypress.env.json e informe os valores esperados pelo projeto (ex.: URL, credenciais, tokens, etc.).
+Edite o ```cypress.env.json``` e informe os valores esperados pelo projeto (ex.: URL, credenciais, tokens, etc.).
 
-⚠️ O arquivo cypress.env.json não é versionado por conter dados sensíveis.
+⚠️ O arquivo ```cypress.env.json``` não é versionado por conter dados sensíveis.
 
 ## ▶️ Executando os testes
 #### 🖥️ Abrir interface do Cypress (modo interativo)
