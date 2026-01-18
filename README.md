@@ -45,3 +45,31 @@ Cada tipo de teste foi separado em pastas para facilitar o entendimento e a manu
 ```
 
 
+📎 **Observação:** o diretório `reports/` é gerado automaticamente a cada execução e não é versionado.
+
+---
+
+## 🔧 Pré-requisitos
+
+Para executar este projeto localmente, é necessário:
+
+- Node.js (versão LTS)
+- npm
+- PowerShell (Windows)
+- Git
+
+---
+
+## 🧭 Testes E2E (Cypress)
+
+Os testes E2E validam fluxos completos da aplicação, simulando o comportamento real de um usuário final.
+
+Eles foram desenvolvidos utilizando **Cypress**, seguindo a estrutura padrão da ferramenta.
+
+### ▶️ Executar os testes E2E
+
+```bash
+npm ci
+npm run cy:run
+
+
