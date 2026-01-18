@@ -79,5 +79,39 @@ Formatos suportados:
 
 🧹 A pasta results/ contém apenas artefatos de execução e não é versionada.
 
+## 🔐 Ambientes e variáveis
+
+As configurações das APIs são controladas por environments do Postman, incluindo:
+
+- Base URL
+- Tokens de autenticação
+- Headers
+- Variáveis dinâmicas
+
+##📌 Recomendações:
+
+- Use arquivos de exemplo (```*.example.json```) quando houver dados sensíveis
+- Evite versionar credenciais reais
+
+## 🧩 Troubleshooting
+#### ❌ Newman não executa
+
+Verifique:
+
+- Se você está dentro da pasta api/
+- Se os caminhos das collections e environments estão corretos
+
+Reinstale as dependências se necessário:
+
+```
+npm ci
+```
+
+## ▶️ Executar apenas uma collection específica
+
+```
+npx newman run collections/login.collection.json
+```
+
 
 
