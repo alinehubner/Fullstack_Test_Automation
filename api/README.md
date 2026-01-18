@@ -107,7 +107,7 @@ Reinstale as dependências se necessário:
 npm ci
 ```
 
-## ▶️ Executar apenas uma collection específica
+### ▶️ Executar apenas uma collection específica
 
 ```
 npx newman run collections/login.collection.json
