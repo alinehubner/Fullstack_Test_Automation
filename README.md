@@ -59,6 +59,7 @@ Eles foram desenvolvidos utilizando **Cypress**, seguindo a estrutura padrão da
 ---
 
 ```bash
+cd e2e
 npm ci
 npm run cy:run
 
@@ -70,34 +71,10 @@ Os testes de API foram implementados utilizando a **API pública Restful-Booker*
 
 A collection foi criada no **Postman**, com validações automatizadas por meio de scripts, e depois exportada para execução via **Newman**, sem necessidade de abrir o Postman.
 
----
-
-### 📋 Cenários cobertos
-
-- Health Check (`/ping`)
-- Autenticação com geração dinâmica de token
-- Criação de booking
-- Consulta de booking por ID
-- Atualização de booking
-- Exclusão de booking
-- Validação pós-delete (HTTP 404)
-
----
-
-### 🧠 Conceitos aplicados nos testes de API
-
-- Uso de variáveis de *environment*
-- Geração dinâmica de `token` e `bookingId`
-- Reutilização de dados entre requisições
-- Execução completa via **Runner / Newman**
-- Scripts de validação no **Post-response**
-- Execução *headless*, preparada para **CI/CD**
-
----
-
 ### ▶️ Executar os testes de API
 
 ```
+cd api
 npm ci
 .\api\run-api-tests.ps1
 
