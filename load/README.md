@@ -9,11 +9,13 @@ O objetivo é validar o comportamento da aplicação sob carga, analisando **tem
 ## 📁 Estrutura do módulo
 
 ```
-load/
-├── scripts/ # Scripts de teste k6
-├── results/ # Resultados e relatórios (não versionado)
-├── run-load-tests.ps1
-└── README.md
+
+├── load/
+│   ├──scripts/                  #Scripts de teste k6
+│   ├──results/                  #Resultados e relatórios (não versionado)
+│   ├──run-load-tests.ps1
+│   └── README.md
+
 ```
 
 ## 🔧 Pré-requisitos
