@@ -41,14 +41,14 @@ Cada tipo de teste foi separado em pastas para facilitar o entendimento e a manu
 │   ├── nodes_modules/            # NÃO versionado
 ├── .cypress-cucumber-preprocessorrc.js
 ├── cypress.config.js
-├── cypress.env.example.json  # Exemplo (versionado)
-├── cypress.env.json          # NÃO versionado
+├── cypress.env.example.json      # Exemplo (versionado)
+├── cypress.env.json              # NÃO versionado
 ├── package.json
 └── package-lock.json
 └── README.md
 ├── load/
-│   ├──scripts/ # Scripts de teste k6
-│   ├──results/ # Resultados e relatórios (não versionado)
+│   ├──scripts/                   # Scripts de teste k6
+│   ├──results/                   # Resultados e relatórios (não versionado)
 │   ├──run-load-tests.ps1
 │   └── README.md
 
