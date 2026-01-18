@@ -190,13 +190,15 @@ Ex.: ```k6-output-YYYYMMDD-HHMMSS.txt```
 
 2. Resumo da execução (Summary JSON)
 Um resumo com métricas agregadas (útil para auditoria/CI)
-Ex.: summary-YYYYMMDD-HHMMSS.json
+Ex.: ```summary-YYYYMMDD-HHMMSS.json```
 
 3. Relatório em HTML
 Relatório visual gerado a partir do JSON bruto do k6
-Ex.: k6-report-YYYYMMDD-HHMMSS.html
+Ex.: ```k6-report-YYYYMMDD-HHMMSS.html```
 
 O diretório load/results/ não é versionado, pois os arquivos são gerados a cada execução.
+
+--- 
 
 ### ⚙️ Observações
 
