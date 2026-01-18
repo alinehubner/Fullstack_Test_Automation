@@ -6,7 +6,7 @@
  * 
  */
 
-import { bookingFlow } from "./scenarios/bookingFlow.js";
+import { bookingFlow } from "./scenarios/bookingFlow.readonly.js";
 import { getConfig } from "./utils/config.js";
 
 // Relatório HTML (import remoto). Requer internet no momento da execução.

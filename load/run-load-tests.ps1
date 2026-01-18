@@ -1,39 +1,33 @@
 <#
 =========================================
-Runner do k6 para executar 2 cenários:
+Runner do k6 para executar 2 cenarios:
 =========================================
 
 1) FIXED (baseline)  -> VUs fixos por um tempo
 2) RAMPING (gradual) -> stages (subida/descida de VUs)
 
-O script também:
-- cria as pastas de evidência (fixed/ramping)
-- permite configurar BASE_URL, USERNAME, PASSWORD, VUS, DURATION via parâmetros
+O script tambem:
+- cria as pastas de evidencia (fixed/ramping)
+- permite configurar BASE_URL, USERNAME, PASSWORD, VUS, DURATION via parametros
 
 Exemplos de uso:
 
-# Padrão (Restful Booker, VUS=5, DURATION=30s)
+# Padrao (Restful Booker, VUS=5, DURATION=30s)
 .\load\run-load-tests.ps1
 
 # Informando baseUrl e baseline maior
 .\load\run-load-tests.ps1 -BaseUrl "https://restful-booker.herokuapp.com" -Vus 10 -Duration "45s"
 
-# Rodar só o baseline
+# Rodar so o baseline
 .\load\run-load-tests.ps1 -OnlyFixed
 
-# Rodar só o ramping
+# Rodar so o ramping
 .\load\run-load-tests.ps1 -OnlyRamping
-
-# Alterar credenciais (se necessário)
-.\load\run-load-tests.ps1 -Username "admin" -Password "password123"
 #>
 
 [CmdletBinding()]
 param(
-  # URL base do sistema sob teste
   [string]$BaseUrl = "https://restful-booker.herokuapp.com",
-
-  # Credenciais (Restful Booker demo)
   [string]$Username = "admin",
   [string]$Password = "password123",
 
@@ -47,44 +41,39 @@ param(
 )
 
 # -----------------------------------------
-# 0) Garantias / validações simples
+# 0) Validacoes simples
 # -----------------------------------------
 if ($OnlyFixed -and $OnlyRamping) {
-  Write-Error "Use apenas -OnlyFixed OU -OnlyRamping (não os dois ao mesmo tempo)."
+  Write-Error "Use apenas -OnlyFixed OU -OnlyRamping (nao os dois ao mesmo tempo)."
   exit 1
 }
 
-# Caminho do script main.js do k6
 $K6Script = "load/scripts/main.js"
-
 if (-not (Test-Path $K6Script)) {
-  Write-Error "Arquivo não encontrado: $K6Script. Verifique se você está rodando a partir da raiz do repositório."
+  Write-Error "Arquivo nao encontrado: $K6Script. Rode a partir da raiz do repositorio."
   exit 1
 }
 
 # -----------------------------------------
-# 1) Criar pastas de evidência (results)
+# 1) Criar pastas de evidencia (results)
 # -----------------------------------------
-# Observação: o git não versiona pastas vazias e load/results costuma estar no .gitignore.
-# Por isso criamos no momento da execução para garantir que o handleSummary consiga gravar os arquivos.
 New-Item -ItemType Directory -Force -Path "load/results/fixed" | Out-Null
 New-Item -ItemType Directory -Force -Path "load/results/ramping" | Out-Null
-
-Write-Host "==> Pastas de evidência garantidas em load/results/(fixed|ramping)" -ForegroundColor Green
+Write-Host "==> Pastas de evidencia garantidas em load/results/(fixed|ramping)" -ForegroundColor Green
 
 # -----------------------------------------
-# 2) Função auxiliar para rodar k6 com env vars
+# 2) Funcao auxiliar para rodar o k6
+#    - Retorna $true se OK, $false se falhou
+#    - Nao aborta a execucao do script no meio
 # -----------------------------------------
 function Invoke-K6Run {
   param(
     [Parameter(Mandatory=$true)][ValidateSet("fixed","ramping")]
     [string]$Scenario,
 
-    # Parâmetros extras (ex.: VUS/DURATION no fixed)
     [hashtable]$ExtraEnv = @{}
   )
 
-  # Env vars padrão (usadas pelo config.js)
   $envArgs = @(
     "-e", "SCENARIO=$Scenario",
     "-e", "BASE_URL=$BaseUrl",
@@ -92,7 +81,6 @@ function Invoke-K6Run {
     "-e", "PASSWORD=$Password"
   )
 
-  # Env vars extras (ex.: VUS/DURATION)
   foreach ($key in $ExtraEnv.Keys) {
     $envArgs += @("-e", "$key=$($ExtraEnv[$key])")
   }
@@ -104,40 +92,54 @@ function Invoke-K6Run {
     Write-Host "    VUS=$Vus | DURATION=$Duration"
   }
 
-  # Execução do k6
-  # Observação: se o k6 não estiver instalado, este comando falhará.
   k6 run @envArgs $K6Script
 
   if ($LASTEXITCODE -ne 0) {
-    Write-Error "k6 finalizou com erro no cenário: $Scenario (exit code $LASTEXITCODE)."
-    exit $LASTEXITCODE
+    Write-Warning "k6 terminou com erro no cenario: $Scenario (exit code $LASTEXITCODE). Vou continuar para o proximo."
+    return $false
   }
 
   Write-Host "==> k6 finalizado com sucesso (SCENARIO=$Scenario)." -ForegroundColor Green
+  return $true
 }
 
 # -----------------------------------------
-# 3) Executar cenários conforme flags
+# 3) Executa cenarios e so falha no final
 # -----------------------------------------
+$fixedOk = $true
+$rampingOk = $true
+
 if (-not $OnlyRamping) {
-  # FIXED (baseline)
-  Invoke-K6Run -Scenario "fixed" -ExtraEnv @{
+  $fixedOk = Invoke-K6Run -Scenario "fixed" -ExtraEnv @{
     VUS      = $Vus
     DURATION = $Duration
   }
 }
 
 if (-not $OnlyFixed) {
-  # RAMPING (gradual) - stages estão definidos no main.js
-  Invoke-K6Run -Scenario "ramping"
+  $rampingOk = Invoke-K6Run -Scenario "ramping"
 }
 
 # -----------------------------------------
-# 4) Resumo final: onde estão as evidências
+# 4) Resumo (sem ternario - compativel)
 # -----------------------------------------
 Write-Host ""
-Write-Host "==> Evidências geradas (seu main.js salva via handleSummary):" -ForegroundColor Yellow
-Write-Host "    - load/results/fixed/   (baseline)"
-Write-Host "    - load/results/ramping/ (gradual)"
+Write-Host "==> Resumo da execucao:" -ForegroundColor Yellow
+
+Write-Host "    FIXED:   " -NoNewline
+if ($fixedOk) { Write-Host "OK" -ForegroundColor Green } else { Write-Host "FALHOU" -ForegroundColor Red }
+
+Write-Host "    RAMPING: " -NoNewline
+if ($rampingOk) { Write-Host "OK" -ForegroundColor Green } else { Write-Host "FALHOU" -ForegroundColor Red }
+
 Write-Host ""
+Write-Host "==> Evidencias (handleSummary):" -ForegroundColor Yellow
+Write-Host "    - load/results/fixed/"
+Write-Host "    - load/results/ramping/"
 Write-Host "Dica: abra o HTML no navegador para visualizar o report." -ForegroundColor Yellow
+
+# Se qualquer um falhar, retorna erro geral (bom pra CI), mas so no final
+if (-not $fixedOk -or -not $rampingOk) {
+  Write-Error "Um ou mais cenarios falharam. Veja os relatorios em load/results/ para detalhes."
+  exit 1
+}
