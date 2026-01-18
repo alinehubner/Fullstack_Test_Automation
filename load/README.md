@@ -25,3 +25,47 @@ Para executar este projeto localmente, é necessário:
 ### Verificar instalação do k6
 ```powershell
 k6 version
+```
+## ▶️ Executando os testes de carga
+Execução simples
+
+```
+cd load
+k6 run scripts/<script>.js
+```
+
+## 🔐 Configuração dos testes
+
+Os scripts de carga podem conter:
+
+- Número de usuários virtuais (VUs)
+- Duração do teste
+- Ramp-up / ramp-down
+- Thresholds (critérios de aceitação)
+
+Exemplo conceitual:
+
+- Quantidade de usuários simultâneos
+- Tempo máximo de resposta aceitável
+- Taxa de erro permitida
+
+Essas configurações ficam definidas diretamente nos scripts dentro de ```scripts/```.
+
+## 📊 Resultados
+
+Durante a execução, o k6 exibe métricas no terminal, como:
+
+- Tempo médio de resposta
+- Percentis (p90, p95, p99)
+- Taxa de erro
+- Throughput
+
+Caso configurado, os resultados podem ser exportados para arquivos dentro de:
+
+```
+load/results/
+```
+
+🧹 A pasta ```results/``` contém apenas artefatos de execução e não é versionada.
+
+
