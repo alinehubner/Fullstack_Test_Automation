@@ -10,7 +10,7 @@ Este módulo contém os testes **End-to-End (E2E)** usando **Cypress** com supor
 ```
 e2e/
 ├── cypress/
-│   ├── e2e/                  # Specs (cenários E2E)
+│   ├── e2e/                  # Cenários E2E
 │   ├── fixtures/             # Massas de teste
 │   ├── pageObjects/          # Page Objects
 │   ├── support/              # Commands e setup global
