@@ -44,3 +44,32 @@ Cada tipo de teste foi separado em pastas para facilitar o entendimento e a manu
 └── README.md
 ```
 
+
+📎 **Observação:**  
+O diretório `reports/` não é versionado, pois os relatórios são gerados automaticamente a cada execução.
+
+---
+
+## 🔧 Pré-requisitos
+
+Para executar este projeto localmente, é necessário:
+
+- Node.js (versão LTS)
+- npm
+- PowerShell (Windows)
+- Git
+
+---
+
+## 🧭 Testes E2E (Cypress)
+
+Os testes E2E validam fluxos completos da aplicação, simulando o comportamento real de um usuário final.
+
+Eles estão organizados utilizando o Cypress, seguindo a estrutura padrão da ferramenta.
+
+### ▶️ Executar os testes E2E
+
+```bash
+npm ci
+npm run cy:run
+
