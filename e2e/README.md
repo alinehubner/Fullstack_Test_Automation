@@ -10,15 +10,15 @@ Este módulo contém os testes **End-to-End (E2E)** usando **Cypress** com supor
 
 e2e/
 ├── cypress/
-│ ├── e2e/ # Specs (cenários E2E)
-│ ├── fixtures/ # Massas de teste
-│ ├── pageObjects/ # Page Objects (mapeamento de telas/ações)
-│ ├── support/ # Commands e setup global
-│ ├── screenshots/ # Artefatos (não versionado)
-│ └── videos/ # Artefatos (não versionado)
+│   ├── e2e/                  # Specs (cenários E2E)
+│   ├── fixtures/             # Massas de teste
+│   ├── pageObjects/          # Page Objects
+│   ├── support/              # Commands e setup global
+│   ├── screenshots/          # Artefatos (não versionado)
+│   └── videos/               # Artefatos (não versionado)
 ├── .cypress-cucumber-preprocessorrc.js
 ├── cypress.config.js
-├── cypress.env.example.json # Exemplo (versionado)
-├── cypress.env.json # Local (NÃO versionado)
+├── cypress.env.example.json
+├── cypress.env.json          # NÃO versionado
 ├── package.json
 └── package-lock.json
