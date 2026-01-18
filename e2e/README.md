@@ -1,4 +1,4 @@
-# 🧪 E2E — Cypress (ClickSign)
+# 🧪 E2E — Cypress
 
 Este módulo contém os testes **End-to-End (E2E)** usando **Cypress** com suporte a **BDD (Cucumber)**.
 
