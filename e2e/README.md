@@ -7,7 +7,7 @@ Este módulo contém os testes **End-to-End (E2E)** usando **Cypress** com supor
 ---
 
 ## 📁 Estrutura do módulo
-
+```
 e2e/
 ├── cypress/
 │   ├── e2e/                  # Specs (cenários E2E)
@@ -22,3 +22,4 @@ e2e/
 ├── cypress.env.json          # NÃO versionado
 ├── package.json
 └── package-lock.json
+```
