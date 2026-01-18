@@ -57,17 +57,17 @@ Edite o cypress.env.json e informe os valores esperados pelo projeto (ex.: URL, 
 ⚠️ O arquivo cypress.env.json não é versionado por conter dados sensíveis.
 
 ## ▶️ Executando os testes
-### 🖥️ Abrir interface do Cypress (modo interativo)
+#### 🖥️ Abrir interface do Cypress (modo interativo)
 ```
 npx cypress open
 ```
 
-### 🤖 Executar em modo headless (terminal / CI)
+#### 🤖 Executar em modo headless (terminal / CI)
 ```
 npx cypress run
 ```
 
-### 📸 Evidências / Artefatos
+#### 📸 Evidências / Artefatos
 
 Durante a execução, o Cypress pode gerar automaticamente:
 
@@ -79,7 +79,7 @@ Durante a execução, o Cypress pode gerar automaticamente:
 🧹 Esses diretórios são considerados artefatos e não são versionados.
 
 ## 🧩 Troubleshooting
-### ❌ “Command not found” / Cypress não abre
+#### ❌ “Command not found” / Cypress não abre
 
 Confirme que você está dentro da pasta ```e2e/``` e reinstale:
 ```
@@ -87,7 +87,7 @@ cd e2e
 npm ci
 ```
 
-### ❌ Erro de variáveis / login / baseUrl
+#### ❌ Erro de variáveis / login / baseUrl
 
 Confirme a existência do arquivo:
 
@@ -95,7 +95,7 @@ Confirme a existência do arquivo:
 
 Compare as chaves com ```cypress.env.example.json``` e preencha os valores.
 
-### ▶️ Rodar apenas um spec (opcional)
+#### ▶️ Rodar apenas um spec (opcional)
 ```
 npx cypress run --spec "cypress/e2e/**/*.cy.*"
 ```
