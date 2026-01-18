@@ -74,3 +74,5 @@ Eles foram desenvolvidos utilizando **Cypress**, seguindo a estrutura padrão da
 npm ci
 npm run cy:run
 
+```
+
