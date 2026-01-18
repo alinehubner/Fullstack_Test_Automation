@@ -20,24 +20,27 @@ Cada tipo de teste foi separado em pastas para facilitar o entendimento e a manu
 
 ## 🗂️ Estrutura do Projeto
 
+```
 .
 ├── api
-│ ├── postman
-│ │ ├── collections
-│ │ │ └── Restful-Booker.postman_collection.json
-│ │ └── environments
-│ │ └── restful-booker-env.example.json
-│ └── run-api-tests.ps1
+│   ├── postman
+│   │   ├── collections
+│   │   │   └── Restful-Booker.postman_collection.json
+│   │   └── environments
+│   │       └── restful-booker-env.example.json
+│   └── run-api-tests.ps1
 │
 ├── load
-│ └── (estrutura preparada para testes de carga com k6)
+│   └── (estrutura preparada para testes de carga com k6)
 │
 ├── cypress
-│ └── (testes E2E)
+│   └── (testes E2E)
 │
 ├── reports
-│ └── (gerado localmente, não versionado)
+│   └── (gerado localmente, não versionado)
 │
 ├── package.json
 ├── package-lock.json
 └── README.md
+```
+
