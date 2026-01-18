@@ -12,7 +12,7 @@ api/
 │   ├── postman
 │   │   ├── collections
 │   │   └── environments
-│   └── run-api-tests.ps1
+├── prun-api-tests.ps1
 └──README.md
 ```
 
