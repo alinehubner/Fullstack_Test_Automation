@@ -12,6 +12,7 @@ O objetivo é validar o comportamento da aplicação sob carga, analisando **tem
 load/
 ├── scripts/ # Scripts de teste k6
 ├── results/ # Resultados e relatórios (não versionado)
+├── run-load-tests.ps1
 └── README.md
 ```
 
