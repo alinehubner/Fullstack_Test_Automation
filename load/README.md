@@ -76,7 +76,9 @@ Durante a execução, o k6 exibe métricas no terminal, como:
 Caso configurado, os resultados podem ser exportados para arquivos dentro de:
 
 ```
-load/results/
+├── results/                     
+│   ├── fixed/                   
+│   ├── ramping/
 ```
 
 🧹 A pasta ```results/``` contém apenas artefatos de execução e não é versionada.
