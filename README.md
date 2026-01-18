@@ -180,14 +180,6 @@ Ele não tem como objetivo ser um framework completo, mas sim demonstrar entendi
 ```
 
 ---
-
-### ✅ Agora é só isso
-1. GitHub → **Add file → Create new file**
-2. Nome: `README.md`
-3. **Colar tudo acima**
-4. Commit
-
-Não vai quebrar formatação, não vai dividir, não vai bagunçar.  
 Quando quiser, seguimos **direto para o k6** 🚀
 
 
