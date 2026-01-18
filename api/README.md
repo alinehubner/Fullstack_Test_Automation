@@ -14,3 +14,23 @@ api/
 │   │   └── environments
 │   └── run-api-tests.ps1
 ```
+
+## 🔧 Pré-requisitos
+Para executar este projeto localmente, é necessário:
+
+- **Node.js** (versão LTS)
+- **npm**
+- **Git**
+- **Postman** *(opcional — para edição das collections)*
+- **PowerShell** (Windows)
+
+---
+
+## ⚙️ Instalação
+
+No terminal, navegue até a pasta `api/` e instale as dependências:
+
+```powershell
+cd api
+npm ci
+💡 Recomendado: npm ci garante versões consistentes conforme o package-lock.json.
