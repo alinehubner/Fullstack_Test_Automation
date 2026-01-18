@@ -105,10 +105,15 @@ A collection foi criada no **Postman**, com validações automatizadas por meio 
 - Scripts de validação no **Post-response**
 - Execução *headless*, preparada para **CI/CD**
 
+---
+
 ▶️ Executar os testes de API
+
+```
 npm ci
 .\api\run-api-tests.ps1
 
+```
 
 Esse script foi criado para facilitar a execução por qualquer pessoa que clonar o repositório, sem necessidade de ajustes manuais.
 
@@ -122,20 +127,28 @@ executa toda a collection
 
 gera evidência em formato HTML
 
+---
+
 📄 Evidência gerada
 
 Após a execução, um relatório HTML é gerado automaticamente em:
 
+```
 reports/newman/report.html
 
+```
 
 Esse relatório não é versionado, pois é gerado a cada execução.
+
+---
 
 📊 Testes de Carga (k6)
 
 A estrutura para testes de carga utilizando k6 já está preparada no diretório load/.
 
 Implementação em andamento.
+
+---
 
 ✅ Boas práticas adotadas
 
@@ -148,6 +161,8 @@ Execução reprodutível via scripts
 Organização pensada para facilitar CI/CD
 
 Documentação simples e objetiva
+
+---
 
 📝 Considerações finais
 
@@ -163,6 +178,7 @@ proximidade com cenários reais de QA
 
 Ele não tem como objetivo ser um framework completo, mas sim demonstrar entendimento do processo, boas decisões técnicas e capacidade de explicar o que foi feito.
 
+```
 
 ---
 
@@ -174,3 +190,6 @@ Ele não tem como objetivo ser um framework completo, mas sim demonstrar entendi
 
 Não vai quebrar formatação, não vai dividir, não vai bagunçar.  
 Quando quiser, seguimos **direto para o k6** 🚀
+
+
+```
