@@ -35,3 +35,49 @@ cd api
 npm ci
 ```
 💡 Recomendado: npm ci garante versões consistentes conforme o package-lock.json.
+
+## ▶️ Executando os testes de API
+####▶️ Execução simples
+```
+npx newman run collections/<collection>.json `
+  -e environments/<environment>.json
+```
+
+####🚀 Scripts disponíveis (recomendado)
+
+Para facilitar a execução, utilize scripts do ```package.json```:
+
+```
+{
+  "scripts": {
+    "api:run": "newman run collections/collection.json -e environments/environment.json",
+    "api:run:html": "newman run collections/collection.json -e environments/environment.json -r htmlextra"
+  }
+}
+```
+
+Execução:
+
+```
+npm run api:run
+npm run api:run:html
+```
+
+#### 📊 Relatórios
+
+Os relatórios são gerados automaticamente na pasta:
+
+```
+api/results/
+```
+
+Formatos suportados:
+
+- 📟 Console
+
+- 📄 HTML (```newman-reporter-htmlextra```)
+
+🧹 A pasta results/ contém apenas artefatos de execução e não é versionada.
+
+
+
