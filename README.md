@@ -68,11 +68,12 @@ Eles foram desenvolvidos utilizando **Cypress**, seguindo a estrutura padrão da
 
 ### ▶️ Executar os testes E2E
 
+---
+
 ```bash
 npm ci
 npm run cy:run
 
----
 
 🔌 Testes de API (Restful-Booker)
 
