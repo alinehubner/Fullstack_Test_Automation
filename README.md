@@ -184,15 +184,15 @@ k6 run load/scripts/restfulbooker-smoke.js --summary-export load/results/summary
 
 Ao final da execução, o script gera as seguintes evidências dentro de load/results/:
 
-Log do terminal (TXT)
+1. Log do terminal (TXT)
 Arquivo com a saída completa do k6 (métricas + resumo)
 Ex.: k6-output-YYYYMMDD-HHMMSS.txt
 
-Resumo da execução (Summary JSON)
+2. Resumo da execução (Summary JSON)
 Um resumo com métricas agregadas (útil para auditoria/CI)
 Ex.: summary-YYYYMMDD-HHMMSS.json
 
-Relatório em HTML
+3. Relatório em HTML
 Relatório visual gerado a partir do JSON bruto do k6
 Ex.: k6-report-YYYYMMDD-HHMMSS.html
 
