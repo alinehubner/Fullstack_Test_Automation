@@ -87,7 +87,7 @@ cd e2e
 npm ci
 ```
 
-###❌ Erro de variáveis / login / baseUrl
+### ❌ Erro de variáveis / login / baseUrl
 
 Confirme a existência do arquivo:
 
