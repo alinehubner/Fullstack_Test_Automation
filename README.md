@@ -203,16 +203,6 @@ A execução foi pensada para ser simples, reprodutível e fácil de entender.
 
 Este teste pode ser expandido futuramente para cenários mais avançados (ramp-up, stress, soak e integração em CI/CD).
 
-### ✅ Por que esse trecho funciona bem
-- explica o *porquê* do k6 existir no projeto
-- não assusta quem lê
-- mostra que você entende o objetivo do teste
-- não finge maturidade que você não quer vender
-
-Se quiser, posso:
-- ajustar o texto para **inglês**
-- ou ajudar a criar o **script k6** exatamente alinhado com esse README
-
 ---
 
 ## ✅ Boas práticas adotadas
