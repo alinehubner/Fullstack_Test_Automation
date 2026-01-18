@@ -31,3 +31,10 @@ Para executar este projeto localmente, é necessário:
 - npm
 - PowerShell (Windows)
 - Git
+
+## ⚙️ Instalação
+No terminal, entre na pasta `e2e/` e instale as dependências:
+
+```powershell
+cd e2e
+npm ci
