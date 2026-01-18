@@ -37,7 +37,7 @@ npm ci
 💡 Recomendado: npm ci garante versões consistentes conforme o package-lock.json.
 
 ## ▶️ Executando os testes de API
-####▶️ Execução simples
+#### ▶️ Execução simples
 ```
 npx newman run collections/<collection>.json `
   -e environments/<environment>.json
