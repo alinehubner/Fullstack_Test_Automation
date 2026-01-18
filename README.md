@@ -144,9 +144,41 @@ Esse relatório não é versionado, pois é gerado a cada execução.
 
 ## 📊 Testes de Carga (k6)
 
-A estrutura para testes de carga utilizando k6 já está preparada no diretório load/.
+Os testes de carga foram implementados utilizando o **k6**, com o objetivo de validar o comportamento da API sob múltiplas requisições simultâneas.
 
-Implementação em andamento.
+A ideia aqui não é simular um cenário extremo, mas sim um **teste inicial de carga (smoke load)**, suficiente para observar estabilidade, tempo de resposta e taxa de erro.
+
+---
+
+### 🎯 Objetivo do teste
+
+- Verificar se a API responde corretamente sob carga leve
+- Observar tempo de resposta médio e percentis
+- Validar que não ocorrem falhas em chamadas públicas da API
+- Gerar uma base para evolução futura dos testes de performance
+
+---
+
+### ⚙️ Cenário executado
+
+O script de carga realiza as seguintes ações:
+
+- Health Check (`/ping`)
+- Consulta de lista de bookings (`/booking`)
+
+O teste é executado com:
+- múltiplos usuários virtuais simultâneos
+- duração controlada
+- pausas entre as requisições para simular uso real
+
+---
+
+### ▶️ Executar os testes de carga
+
+```
+k6 run load/scripts/restfulbooker-smoke.js --summary-export load/results/summary-smoke.json
+
+```
 
 ---
 
