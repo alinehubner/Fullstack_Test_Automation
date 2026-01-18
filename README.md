@@ -80,54 +80,11 @@ npm ci
 
 ```
 
-Esse script foi criado para facilitar a execução por qualquer pessoa que clonar o repositório, sem necessidade de ajustes manuais.
-
-- Utiliza dependências locais (npx newman)
-- Cria automaticamente a pasta de relatórios
-- Executa toda a collection
-- Gera evidência em formato HTML
-
----
-
-### 📄 Evidência gerada
-
-Após a execução, um relatório HTML é gerado automaticamente em:
-
-```
-reports/newman/report.html
-
-```
-
-Esse relatório não é versionado, pois é gerado a cada execução.
-
 ---
 
 ## 📊 Testes de Carga (k6)
 
 Os testes de carga foram implementados utilizando o **k6**, com o objetivo de validar o comportamento da API sob múltiplas requisições simultâneas.
-
----
-
-### 🎯 Objetivo do teste
-
-- Verificar se a API responde corretamente sob carga leve
-- Observar tempo de resposta médio e percentis
-- Validar que não ocorrem falhas em chamadas públicas da API
-- Gerar uma base para evolução futura dos testes de performance
-
----
-
-### ⚙️ Cenário executado
-
-O script de carga realiza as seguintes ações:
-
-- Health Check (`/ping`)
-- Consulta de lista de bookings (`/booking`)
-
-O teste é executado com:
-- múltiplos usuários virtuais simultâneos
-- duração controlada
-- pausas entre as requisições para simular uso real
 
 ---
 
@@ -137,6 +94,13 @@ O teste é executado com:
 k6 run load/scripts/restfulbooker-smoke.js --summary-export load/results/summary-smoke.json
 
 ```
+
+📌 Instruções completas de instalação, configuração e execução estão documentadas nos READMEs de cada módulo:
+
+- e2e/README.md
+- api/README.md
+- load/README.md
+
 
 ### 📄 Evidências geradas
 
