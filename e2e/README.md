@@ -22,6 +22,7 @@ e2e/
 ├── cypress.env.json          # NÃO versionado
 ├── package.json
 └── package-lock.json
+└── README.md
 ```
 
 ## 🔧 Pré-requisitos
