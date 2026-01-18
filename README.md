@@ -117,6 +117,7 @@ npm ci
 
 Esse script foi criado para facilitar a execução por qualquer pessoa que clonar o repositório, sem necessidade de ajustes manuais.
 
+```
 
 utiliza dependências locais (npx newman)
 
@@ -125,6 +126,8 @@ cria automaticamente a pasta de relatórios
 executa toda a collection
 
 gera evidência em formato HTML
+
+```
 
 ---
 
