@@ -17,6 +17,7 @@ O objetivo é validar o comportamento da aplicação sob carga, analisando **tem
 │   └── README.md
 
 ```
+📎 Observação: o diretório reports/ é gerado automaticamente a cada execução e não é versionado.
 
 ## 🔧 Pré-requisitos
 Para executar este projeto localmente, é necessário:
