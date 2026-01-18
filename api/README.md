@@ -8,12 +8,16 @@ O objetivo é validar se o endpoint continua funcionando como esperado: response
 
 ## 📁 Estrutura do módulo
 ```
-api/
-│   ├── postman
-│   │   ├── collections
-│   │   └── environments
-├── prun-api-tests.ps1
+
+├── api/
+│   ├── postman/
+│   │   ├── collections/
+│   │   └── environments/
+│   ├── results/
+│   │   ├──  newman/              # Resultados e relatórios (não versionado)
+├── run-api-tests.ps1
 └──README.md
+
 ```
 
 ## 🔧 Pré-requisitos
