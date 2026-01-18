@@ -55,9 +55,9 @@ load/
 │   │   └── bookingApi.js
 │   └── utils/
 │       └── config.js
-├── results/                     # ignorado no git
-│   ├── fixed/                   # criado no momento da execucao do teste
-│   ├── ramping/                 # criado no momento da execucao do teste
+├── results/                      # ignorado no git
+│   ├── fixed/                    # criado no momento da execucao do teste
+│   ├── ramping/                  # criado no momento da execucao do teste
 ├── run-load-tests.ps1
 └── README.md
 
