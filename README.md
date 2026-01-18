@@ -12,7 +12,7 @@ O projeto contempla três tipos de testes, organizados em um único repositório
 
 - ✅ **E2E (End-to-End)** — Cypress  
 - 🔌 **API Tests** — Postman + Newman  
-- 📊 **Load Tests** — k6 *(em implementação)*  
+- 📊 **Load Tests** — k6 
 
 Cada tipo de teste foi separado em pastas para facilitar o entendimento e a manutenção.
 
