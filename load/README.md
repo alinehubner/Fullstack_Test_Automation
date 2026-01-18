@@ -68,4 +68,18 @@ load/results/
 
 🧹 A pasta ```results/``` contém apenas artefatos de execução e não é versionada.
 
+## 🧩 Troubleshooting
+#### ❌ Erro ao executar o k6
+
+Verifique:
+
+- Se o k6 está instalado corretamente
+- Se você está dentro da pasta load/
+- Se o script informado existe
+
+### ▶️ Executar um script específico
+
+```
+k6 run scripts/login-load.js
+```
 
