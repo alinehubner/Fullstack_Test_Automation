@@ -5,5 +5,7 @@ e2e/cypress/screenshots/
 e2e/cypress.env.json
 
 #arquivos do Newman 
-reports/
+api/results/
+
+#arquivos do K6
 load/results/
