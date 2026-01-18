@@ -1,66 +1,143 @@
-# load/run-load-tests.ps1
-# Script para executar testes de carga com k6 e gerar 3 evidencias automaticamente:
-# 1) TXT: log completo do terminal (k6-output-*.txt)
-# 2) JSON: summary-export gerado pelo handleSummary() do script k6
-# 3) HTML: relatorio gerado pelo handleSummary() do script k6
-#
-# Pre-requisitos:
-# - k6 instalado e disponivel no PATH
-# - O script k6 (load/scripts/restfulbooker-smoke.js) deve conter a funcao handleSummary()
-#   gerando: load/results/summary-smoke.json e load/results/k6-report.html
+<#
+=========================================
+Runner do k6 para executar 2 cenários:
+=========================================
 
-$ErrorActionPreference = "Stop"
+1) FIXED (baseline)  -> VUs fixos por um tempo
+2) RAMPING (gradual) -> stages (subida/descida de VUs)
 
-# Garante que a execucao ocorre a partir da raiz do repositorio
-$repoRoot = Split-Path -Parent $PSScriptRoot
-Set-Location $repoRoot
+O script também:
+- cria as pastas de evidência (fixed/ramping)
+- permite configurar BASE_URL, USERNAME, PASSWORD, VUS, DURATION via parâmetros
 
-# Pastas e caminhos
-$resultsDir = "load\results"
-$k6Script   = "load\scripts\restfulbooker-smoke.js"
+Exemplos de uso:
 
-# Cria a pasta de resultados (se nao existir)
-New-Item -ItemType Directory -Force -Path $resultsDir | Out-Null
+# Padrão (Restful Booker, VUS=5, DURATION=30s)
+.\load\run-load-tests.ps1
 
-# Valida se o script existe
-if (-not (Test-Path $k6Script)) {
-  throw "Script k6 nao encontrado: $k6Script"
+# Informando baseUrl e baseline maior
+.\load\run-load-tests.ps1 -BaseUrl "https://restful-booker.herokuapp.com" -Vus 10 -Duration "45s"
+
+# Rodar só o baseline
+.\load\run-load-tests.ps1 -OnlyFixed
+
+# Rodar só o ramping
+.\load\run-load-tests.ps1 -OnlyRamping
+
+# Alterar credenciais (se necessário)
+.\load\run-load-tests.ps1 -Username "admin" -Password "password123"
+#>
+
+[CmdletBinding()]
+param(
+  # URL base do sistema sob teste
+  [string]$BaseUrl = "https://restful-booker.herokuapp.com",
+
+  # Credenciais (Restful Booker demo)
+  [string]$Username = "admin",
+  [string]$Password = "password123",
+
+  # Baseline (modo fixed)
+  [int]$Vus = 5,
+  [string]$Duration = "30s",
+
+  # Flags para rodar somente um modo (opcional)
+  [switch]$OnlyFixed,
+  [switch]$OnlyRamping
+)
+
+# -----------------------------------------
+# 0) Garantias / validações simples
+# -----------------------------------------
+if ($OnlyFixed -and $OnlyRamping) {
+  Write-Error "Use apenas -OnlyFixed OU -OnlyRamping (não os dois ao mesmo tempo)."
+  exit 1
 }
 
-# Timestamp para nao sobrescrever as evidencias anteriores
-$ts = Get-Date -Format "yyyyMMdd-HHmmss"
+# Caminho do script main.js do k6
+$K6Script = "load/scripts/main.js"
 
-# Evidencia 1: log do terminal
-$logFile = Join-Path $resultsDir "k6-output-$ts.txt"
-
-# Estes arquivos (Evidencias 2 e 3) sao gerados pelo handleSummary() dentro do script k6
-$summaryFile = Join-Path $resultsDir "summary-smoke.json"
-$htmlFile    = Join-Path $resultsDir "k6-report.html"
-
-Write-Host "==============================================="
-Write-Host "k6 - Execucao de teste de carga (smoke)"
-Write-Host "Script: $k6Script"
-Write-Host "Results: $resultsDir"
-Write-Host "==============================================="
-
-# Executa o k6 e salva tambem o output do terminal em TXT
-# (JSON/HTML serao gerados automaticamente pelo handleSummary())
-k6 run $k6Script | Tee-Object -FilePath $logFile
-
-Write-Host "Execucao finalizada."
-Write-Host "Evidencias geradas:"
-Write-Host "- Log TXT:      $logFile"
-
-if (Test-Path $summaryFile) {
-  Write-Host "- Summary JSON: $summaryFile"
-} else {
-  Write-Host "- Summary JSON: nao encontrado - verifique se o handleSummary() esta no script k6"
+if (-not (Test-Path $K6Script)) {
+  Write-Error "Arquivo não encontrado: $K6Script. Verifique se você está rodando a partir da raiz do repositório."
+  exit 1
 }
 
-if (Test-Path $htmlFile) {
-  Write-Host "- Report HTML:  $htmlFile"
-} else {
-  Write-Host "- Report HTML:  nao encontrado - verifique se o handleSummary() esta no script k6"
+# -----------------------------------------
+# 1) Criar pastas de evidência (results)
+# -----------------------------------------
+# Observação: o git não versiona pastas vazias e load/results costuma estar no .gitignore.
+# Por isso criamos no momento da execução para garantir que o handleSummary consiga gravar os arquivos.
+New-Item -ItemType Directory -Force -Path "load/results/fixed" | Out-Null
+New-Item -ItemType Directory -Force -Path "load/results/ramping" | Out-Null
+
+Write-Host "==> Pastas de evidência garantidas em load/results/(fixed|ramping)" -ForegroundColor Green
+
+# -----------------------------------------
+# 2) Função auxiliar para rodar k6 com env vars
+# -----------------------------------------
+function Invoke-K6Run {
+  param(
+    [Parameter(Mandatory=$true)][ValidateSet("fixed","ramping")]
+    [string]$Scenario,
+
+    # Parâmetros extras (ex.: VUS/DURATION no fixed)
+    [hashtable]$ExtraEnv = @{}
+  )
+
+  # Env vars padrão (usadas pelo config.js)
+  $envArgs = @(
+    "-e", "SCENARIO=$Scenario",
+    "-e", "BASE_URL=$BaseUrl",
+    "-e", "USERNAME=$Username",
+    "-e", "PASSWORD=$Password"
+  )
+
+  # Env vars extras (ex.: VUS/DURATION)
+  foreach ($key in $ExtraEnv.Keys) {
+    $envArgs += @("-e", "$key=$($ExtraEnv[$key])")
+  }
+
+  Write-Host ""
+  Write-Host "==> Rodando k6 (SCENARIO=$Scenario)..." -ForegroundColor Cyan
+  Write-Host "    BASE_URL=$BaseUrl"
+  if ($Scenario -eq "fixed") {
+    Write-Host "    VUS=$Vus | DURATION=$Duration"
+  }
+
+  # Execução do k6
+  # Observação: se o k6 não estiver instalado, este comando falhará.
+  k6 run @envArgs $K6Script
+
+  if ($LASTEXITCODE -ne 0) {
+    Write-Error "k6 finalizou com erro no cenário: $Scenario (exit code $LASTEXITCODE)."
+    exit $LASTEXITCODE
+  }
+
+  Write-Host "==> k6 finalizado com sucesso (SCENARIO=$Scenario)." -ForegroundColor Green
 }
 
-Write-Host "Dica: o diretorio load/results/ deve ficar no .gitignore (nao versionar evidencias)."
+# -----------------------------------------
+# 3) Executar cenários conforme flags
+# -----------------------------------------
+if (-not $OnlyRamping) {
+  # FIXED (baseline)
+  Invoke-K6Run -Scenario "fixed" -ExtraEnv @{
+    VUS      = $Vus
+    DURATION = $Duration
+  }
+}
+
+if (-not $OnlyFixed) {
+  # RAMPING (gradual) - stages estão definidos no main.js
+  Invoke-K6Run -Scenario "ramping"
+}
+
+# -----------------------------------------
+# 4) Resumo final: onde estão as evidências
+# -----------------------------------------
+Write-Host ""
+Write-Host "==> Evidências geradas (seu main.js salva via handleSummary):" -ForegroundColor Yellow
+Write-Host "    - load/results/fixed/   (baseline)"
+Write-Host "    - load/results/ramping/ (gradual)"
+Write-Host ""
+Write-Host "Dica: abra o HTML no navegador para visualizar o report." -ForegroundColor Yellow
