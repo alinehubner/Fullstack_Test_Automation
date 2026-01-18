@@ -40,3 +40,42 @@ cd e2e
 npm ci
 ```
 💡 Recomendado: npm ci (garante versões consistentes com base no package-lock.json).
+
+## 🔐 Configuração de ambiente
+
+Este projeto utiliza variáveis locais no arquivo cypress.env.json.
+
+1) Criar o arquivo a partir do exemplo
+```
+copy cypress.env.example.json cypress.env.json
+```
+
+2) Preencher as variáveis necessárias
+
+Edite o cypress.env.json e informe os valores esperados pelo projeto (ex.: URL, credenciais, tokens, etc.).
+
+⚠️ O arquivo cypress.env.json não é versionado por conter dados sensíveis.
+
+## ▶️ Executando os testes
+## 🖥️ Abrir interface do Cypress (modo interativo)
+```
+npx cypress open
+```
+
+## 🤖 Executar em modo headless (terminal / CI)
+```
+npx cypress run
+```
+
+## 📸 Evidências / Artefatos
+
+Durante a execução, o Cypress pode gerar automaticamente:
+
+- ```cypress/screenshots/``` → screenshots (geralmente em falhas)
+
+- ```cypress/videos/``` → gravações (headless) 
+
+
+🧹 Esses diretórios são considerados artefatos e não são versionados.
+
+
