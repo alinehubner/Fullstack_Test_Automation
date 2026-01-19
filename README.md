@@ -134,10 +134,15 @@ Os resultados das execuções são anexados como Artifacts em cada execução do
 
 Este repositório não versiona relatórios completos, estes são gerados dinamicamente a cada execução.
 
-As evidências oficiais das execuções automatizadas podem ser encontradas:
-- Nos Artifacts do GitHub Actions
-- Localmente, após a execução de cada tipo de teste
-  
+As evidências das execuções podem ser encontradas:
+- **CI (GitHub Actions)**  
+  Aba **Actions** → selecionar o run mais recente → secao **Artifacts**
+
+- **Execucao local**  
+  Geradas automaticamente apos a execucao de cada tipo de teste (E2E, API e Carga)
+
+O diretorio `evidence/` contem apenas exemplos ilustrativos dos tipos de evidencias geradas.
+ 
 ---
 
 ## ✅ Boas práticas adotadas
