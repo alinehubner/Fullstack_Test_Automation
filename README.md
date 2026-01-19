@@ -146,13 +146,13 @@ As evidências oficiais das execuções automatizadas podem ser encontradas:
 - Nenhuma variável sensível versionada
 - Execução reprodutível via scripts
 - Organização pensada para facilitar CI/CD
-- Documentação simples e objetiva
+- Documentação clara e organizada por módulo
 
 ---
 
 ## 📝 Considerações finais
 
-- Este projeto foi construído com foco em:
+Este projeto foi construído com foco em:
 - Clareza
 - Organização
 - Aprendizado
@@ -160,4 +160,3 @@ As evidências oficiais das execuções automatizadas podem ser encontradas:
 
 Ele não tem como objetivo ser um framework completo, mas sim demonstrar entendimento do processo, boas decisões técnicas e capacidade de explicar o que foi feito.
 
-```
