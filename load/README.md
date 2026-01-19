@@ -28,6 +28,8 @@ load/
 ```
 📎 Observação: o diretório ```results/``` é gerado automaticamente a cada execução e não é versionado.
 
+---
+
 ## 🔧 Pré-requisitos
 Para executar este projeto localmente, é necessário:
 
@@ -39,13 +41,21 @@ Para executar este projeto localmente, é necessário:
 ```powershell
 k6 version
 ```
-## ▶️ Executando os testes de carga
-Execução simples
 
+---
+
+## ▶️ Executando os testes de carga
+Execução recomendado
 ```
 cd load
-k6 run scripts/<script>.js
+.\run-load-tests.ps1
 ```
+Execucao manual (opcional)
+```
+k6 run scripts/main.js
+```
+
+---
 
 ## 🔐 Configuração dos testes
 
@@ -63,6 +73,8 @@ Exemplo conceitual:
 - Taxa de erro permitida
 
 Essas configurações ficam definidas diretamente nos scripts dentro de ```scripts/```.
+
+---
 
 ## 📊 Resultados
 
@@ -82,6 +94,8 @@ results/
 ```
 
 🧹 A pasta ```results/``` contém apenas artefatos de execução e não é versionada.
+
+---
 
 ## 🧩 Troubleshooting
 #### ❌ Erro ao executar o k6
