@@ -64,28 +64,6 @@ npx newman run collections/<collection>.json `
 
 ---
 
-#### 🚀 Scripts disponíveis (recomendado)
-
-Para facilitar a execução, utilize scripts do ```package.json```:
-
-```
-{
-  "scripts": {
-    "api:run": "newman run collections/collection.json -e environments/environment.json",
-    "api:run:html": "newman run collections/collection.json -e environments/environment.json -r htmlextra"
-  }
-}
-```
-
-Execução:
-
-```
-npm run api:run
-npm run api:run:html
-```
-
----
-
 ## 📊 Relatórios
 
 Os relatórios são gerados automaticamente na pasta:
