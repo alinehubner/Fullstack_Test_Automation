@@ -8,8 +8,11 @@ Given("que acesso a pagina de login", () => {
 });
 
 When("realizo login com usuario valido", () => {
-  loginPage.preencherUsuario(Cypress.env("user"));
-  loginPage.preencherSenha(Cypress.env("pass"));
+  const username = Cypress.env("USERNAME");
+  const password = Cypress.env("PASSWORD");
+
+  loginPage.preencherUsuario(username);
+  loginPage.preencherSenha(password);
   loginPage.clicarLogin();
 });
 
