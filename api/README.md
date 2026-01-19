@@ -119,5 +119,6 @@ npm ci
 npx newman run collections/login.collection.json
 ```
 
+Este modulo foi estruturado para facilitar execucao local e integracao em pipelines CI/CD.
 
 
