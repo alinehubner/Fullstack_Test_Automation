@@ -72,12 +72,14 @@ npx cypress run
 
 Durante a execução, o Cypress pode gerar automaticamente:
 
-- ```cypress/screenshots/``` → screenshots (geralmente em falhas)
-
-- ```cypress/videos/``` → gravações (headless) 
-
+- ```cypress/screenshots/``` → screenshots (gerados em falhas)
+- ```cypress/videos/``` → videos das execucoes (modo headless)
 
 🧹 Esses diretórios são considerados artefatos e não são versionados.
+
+As evidencias oficiais de CI podem ser baixadas via GitHub Actions (Artifacts).
+
+---
 
 ## 🧩 Troubleshooting
 #### ❌ “Command not found” / Cypress não abre
