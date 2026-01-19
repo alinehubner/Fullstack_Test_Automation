@@ -47,7 +47,16 @@ npm ci
 ---
 
 ## ▶️ Executando os testes de API
-#### ▶️ Execução simples
+#### ▶️ Executando os testes de API (recomendado)
+
+```
+cd api
+npm ci
+.\run-api-tests.ps1
+```
+
+#### ▶️ Execucao manual (opcional)
+
 ```
 npx newman run collections/<collection>.json `
   -e environments/<environment>.json
