@@ -45,12 +45,12 @@ k6 version
 ---
 
 ## ▶️ Executando os testes de carga
-Execução recomendado
+Execução recomendada
 ```
 cd load
 .\run-load-tests.ps1
 ```
-Execucao manual (opcional)
+Execucao manual
 ```
 k6 run scripts/main.js
 ```
