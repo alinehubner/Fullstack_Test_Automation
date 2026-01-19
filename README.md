@@ -132,32 +132,12 @@ Os resultados das execuções são anexados como Artifacts em cada execução do
 
 ### 📄 Evidências geradas
 
-Ao final da execução, o script gera as seguintes evidências dentro de load/results/:
+Este repositório não versiona relatórios completos, estes são gerados dinamicamente a cada execução.
 
-1. Log do terminal (TXT)
-Arquivo com a saída completa do k6 (métricas + resumo)
-Ex.: ```k6-output-YYYYMMDD-HHMMSS.txt```
-
-2. Resumo da execução (Summary JSON)
-Um resumo com métricas agregadas (útil para auditoria/CI)
-Ex.: ```summary-YYYYMMDD-HHMMSS.json```
-
-3. Relatório em HTML
-Relatório visual gerado a partir do JSON bruto do k6
-Ex.: ```k6-report-YYYYMMDD-HHMMSS.html```
-
-O diretório ```load/results/``` não é versionado, pois os arquivos são gerados a cada execução.
-
---- 
-
-### ⚙️ Observações
-
-O relatório HTML é gerado utilizando o pacote k6-reporter.
-
-A execução foi pensada para ser simples, reprodutível e fácil de entender.
-
-Este teste pode ser expandido futuramente para cenários mais avançados (ramp-up, stress, soak e integração em CI/CD).
-
+As evidências oficiais das execuções automatizadas podem ser encontradas:
+- Nos Artifacts do GitHub Actions
+- Localmente, após a execução de cada tipo de teste
+  
 ---
 
 ## ✅ Boas práticas adotadas
