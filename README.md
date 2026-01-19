@@ -22,49 +22,17 @@ Cada tipo de teste foi separado em pastas para facilitar o entendimento e a manu
 
 ```
 
-├── api/
-│   ├── postman/
-│   │   ├── collections/
-│   │   └── environments/
-│   ├── results/
-│   │   ├──  newman/              # Resultados e relatórios (não versionado)
-├── run-api-tests.ps1
-└──README.md
-├── e2e/
-│   ├── cypress/
-│   │   ├── e2e/                  # Cenários E2E
-│   │   ├── fixtures/             # Massas de teste
-│   │   ├── pageObjects/          # Page Objects
-│   │   ├── support/              # Commands e setup global
-│   │   ├── screenshots/          # Artefatos (não versionado)
-│   │   ├── videos/               # Artefatos (não versionado)
-│   ├── nodes_modules/            # NÃO versionado
-├── .cypress-cucumber-preprocessorrc.js
-├── cypress.config.js
-├── cypress.env.example.json      # Exemplo (versionado)
-├── cypress.env.json              # NÃO versionado
-├── package.json
-└── package-lock.json
-└── README.md
-load/
-├── scripts/
-│   ├── main.js
-│   ├── scenarios/
-│   │   └── bookingFlow.js
-│   ├── requests/
-│   │   └── bookingApi.js
-│   └── utils/
-│       └── config.js
-├── results/                      # ignorado no git
-│   ├── fixed/                    # criado no momento da execucao do teste
-│   ├── ramping/                  # criado no momento da execucao do teste
-├── run-load-tests.ps1
+├── e2e/                 # Testes E2E (Cypress)
+├── api/                 # Testes de API (Postman / Newman)
+├── load/                # Testes de Carga (k6)
+├── .github/
+│ └── workflows/ci.yml   # Pipeline CI/CD (GitHub Actions)
 └── README.md
 
 ```
 
 
-📎 **Observação:** o diretório `reports/` é gerado automaticamente a cada execução e não é versionado.
+📎 **Observação:** diretórios de relatórios (`screenshots`, `videos`, `results`, etc.) são gerados automaticamente a cada execução e **não são versionados**.
 
 ---
 
@@ -72,10 +40,11 @@ load/
 
 Para executar este projeto localmente, é necessário:
 
-- Node.js (versão LTS)
-- npm
-- PowerShell (Windows)
-- Git
+- **Node.js** (versão LTS)
+- **npm**
+- **Git**
+- **PowerShell** (Windows)
+- **k6** (para testes de carga)
 
 ---
 
@@ -87,13 +56,13 @@ Eles foram desenvolvidos utilizando **Cypress**, seguindo a estrutura padrão da
 
 ### ▶️ Executar os testes E2E
 
----
-
 ```bash
+cd e2e
 npm ci
 npm run cy:run
-
 ```
+
+---
 
 ## 🔌 Testes de API (Restful-Booker)
 
@@ -101,89 +70,20 @@ Os testes de API foram implementados utilizando a **API pública Restful-Booker*
 
 A collection foi criada no **Postman**, com validações automatizadas por meio de scripts, e depois exportada para execução via **Newman**, sem necessidade de abrir o Postman.
 
----
-
-### 📋 Cenários cobertos
-
-- Health Check (`/ping`)
-- Autenticação com geração dinâmica de token
-- Criação de booking
-- Consulta de booking por ID
-- Atualização de booking
-- Exclusão de booking
-- Validação pós-delete (HTTP 404)
-
----
-
-### 🧠 Conceitos aplicados nos testes de API
-
-- Uso de variáveis de *environment*
-- Geração dinâmica de `token` e `bookingId`
-- Reutilização de dados entre requisições
-- Execução completa via **Runner / Newman**
-- Scripts de validação no **Post-response**
-- Execução *headless*, preparada para **CI/CD**
-
----
-
 ### ▶️ Executar os testes de API
 
 ```
+cd api
 npm ci
 .\api\run-api-tests.ps1
 
 ```
-
-Esse script foi criado para facilitar a execução por qualquer pessoa que clonar o repositório, sem necessidade de ajustes manuais.
-
-- Utiliza dependências locais (npx newman)
-- Cria automaticamente a pasta de relatórios
-- Executa toda a collection
-- Gera evidência em formato HTML
-
----
-
-### 📄 Evidência gerada
-
-Após a execução, um relatório HTML é gerado automaticamente em:
-
-```
-reports/newman/report.html
-
-```
-
-Esse relatório não é versionado, pois é gerado a cada execução.
 
 ---
 
 ## 📊 Testes de Carga (k6)
 
 Os testes de carga foram implementados utilizando o **k6**, com o objetivo de validar o comportamento da API sob múltiplas requisições simultâneas.
-
----
-
-### 🎯 Objetivo do teste
-
-- Verificar se a API responde corretamente sob carga leve
-- Observar tempo de resposta médio e percentis
-- Validar que não ocorrem falhas em chamadas públicas da API
-- Gerar uma base para evolução futura dos testes de performance
-
----
-
-### ⚙️ Cenário executado
-
-O script de carga realiza as seguintes ações:
-
-- Health Check (`/ping`)
-- Consulta de lista de bookings (`/booking`)
-
-O teste é executado com:
-- múltiplos usuários virtuais simultâneos
-- duração controlada
-- pausas entre as requisições para simular uso real
-
----
 
 ### ▶️ Executar os testes de carga
 
@@ -192,34 +92,52 @@ k6 run load/scripts/restfulbooker-smoke.js --summary-export load/results/summary
 
 ```
 
-### 📄 Evidências geradas
+---
 
-Ao final da execução, o script gera as seguintes evidências dentro de load/results/:
+## 📌 Instruções completas de instalação, configuração e execução estão documentadas nos READMEs de cada módulo:
 
-1. Log do terminal (TXT)
-Arquivo com a saída completa do k6 (métricas + resumo)
-Ex.: ```k6-output-YYYYMMDD-HHMMSS.txt```
+- e2e/README.md
+- api/README.md
+- load/README.md
 
-2. Resumo da execução (Summary JSON)
-Um resumo com métricas agregadas (útil para auditoria/CI)
-Ex.: ```summary-YYYYMMDD-HHMMSS.json```
+---
 
-3. Relatório em HTML
-Relatório visual gerado a partir do JSON bruto do k6
-Ex.: ```k6-report-YYYYMMDD-HHMMSS.html```
+## 🤖 CI/CD (GitHub Actions)
 
-O diretório load/results/ não é versionado, pois os arquivos são gerados a cada execução.
+O pipeline de integração contínua está definido em:
 
---- 
+```
+.github/workflows/ci.yml
+```
 
-### ⚙️ Observações
+Como executar o pipeline
 
-O relatório HTML é gerado utilizando o pacote k6-reporter.
+- Automático: a cada ```push``` ou ```pull request``` na branch ```main```
+- Manual: GitHub → aba Actions → workflow CI - Tests → Run workflow
 
-A execução foi pensada para ser simples, reprodutível e fácil de entender.
+O que o pipeline executa
 
-Este teste pode ser expandido futuramente para cenários mais avançados (ramp-up, stress, soak e integração em CI/CD).
+- Testes E2E (Cypress)
+- Testes de API (Newman)
+- Testes de Carga (k6)
 
+Relatórios e evidências
+
+Os resultados das execuções são anexados como Artifacts em cada execução do workflow, incluindo:
+- Screenshots e vídeos do Cypress
+- Relatórios do Newman
+- Saídas e resumos do k6
+
+---
+
+## 📄 Evidências geradas
+
+Este repositório não versiona relatórios completos, estes são gerados dinamicamente a cada execução.
+
+As evidências oficiais das execuções automatizadas podem ser encontradas:
+- Nos Artifacts do GitHub Actions
+- Localmente, após a execução de cada tipo de teste
+  
 ---
 
 ## ✅ Boas práticas adotadas
@@ -228,13 +146,13 @@ Este teste pode ser expandido futuramente para cenários mais avançados (ramp-u
 - Nenhuma variável sensível versionada
 - Execução reprodutível via scripts
 - Organização pensada para facilitar CI/CD
-- Documentação simples e objetiva
+- Documentação clara e organizada por módulo
 
 ---
 
 ## 📝 Considerações finais
 
-- Este projeto foi construído com foco em:
+Este projeto foi construído com foco em:
 - Clareza
 - Organização
 - Aprendizado
@@ -242,4 +160,3 @@ Este teste pode ser expandido futuramente para cenários mais avançados (ramp-u
 
 Ele não tem como objetivo ser um framework completo, mas sim demonstrar entendimento do processo, boas decisões técnicas e capacidade de explicar o que foi feito.
 
-```

@@ -55,6 +55,7 @@ jobs:
           CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
           CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
 
+
       # Faz upload das evidencias do Cypress (videos e screenshots)
       - name: Upload Cypress artifacts
         if: always()
@@ -138,3 +139,6 @@ jobs:
           name: k6-load-artifacts
           path: load/results
           if-no-files-found: ignore
+
+
+          
