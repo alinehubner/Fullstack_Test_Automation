@@ -21,6 +21,8 @@ O objetivo é validar se o endpoint continua funcionando como esperado: response
 ```
 📎 Observação: o diretório ```results/newman``` é gerado automaticamente a cada execução e não é versionado.
 
+---
+
 ## 🔧 Pré-requisitos
 Para executar este projeto localmente, é necessário:
 
@@ -42,12 +44,16 @@ npm ci
 ```
 💡 Recomendado: npm ci garante versões consistentes conforme o package-lock.json.
 
+---
+
 ## ▶️ Executando os testes de API
 #### ▶️ Execução simples
 ```
 npx newman run collections/<collection>.json `
   -e environments/<environment>.json
 ```
+
+---
 
 #### 🚀 Scripts disponíveis (recomendado)
 
@@ -69,7 +75,9 @@ npm run api:run
 npm run api:run:html
 ```
 
-#### 📊 Relatórios
+---
+
+## 📊 Relatórios
 
 Os relatórios são gerados automaticamente na pasta:
 
@@ -85,6 +93,8 @@ Formatos suportados:
 
 🧹 A pasta results/ contém apenas artefatos de execução e não é versionada.
 
+---
+
 ## 🔐 Ambientes e variáveis
 
 As configurações das APIs são controladas por environments do Postman, incluindo:
@@ -94,10 +104,14 @@ As configurações das APIs são controladas por environments do Postman, inclui
 - Headers
 - Variáveis dinâmicas
 
+---
+
 ## 📌 Recomendações:
 
 - Use arquivos de exemplo (```*.example.json```) quando houver dados sensíveis
 - Evite versionar credenciais reais
+
+---
 
 ## 🧩 Troubleshooting
 #### ❌ Newman não executa
