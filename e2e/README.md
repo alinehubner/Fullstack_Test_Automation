@@ -82,9 +82,12 @@ Durante a execução, o Cypress pode gerar automaticamente:
 ## 🧩 Troubleshooting
 #### ❌ “Command not found” / Cypress não abre
 
-Confirme que você está dentro da pasta ```e2e/``` e reinstale:
+Verifique:
+- Se voce esta dentro da pasta `e2e/`
+- Se as dependencias foram instaladas corretamente
+
+Reinstalar dependencias:
 ```
-cd e2e
 npm ci
 ```
 
