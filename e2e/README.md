@@ -25,6 +25,8 @@ e2e/
 └── README.md
 ```
 
+---
+
 ## 🔧 Pré-requisitos
 Para executar este projeto localmente, é necessário:
 
@@ -32,6 +34,8 @@ Para executar este projeto localmente, é necessário:
 - npm
 - Git
 - PowerShell (Windows)
+
+---
 
 ## ⚙️ Instalação
 No terminal, entre na pasta `e2e/` e instale as dependências:
