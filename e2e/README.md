@@ -96,8 +96,8 @@ Confirme a existência do arquivo:
 
 Compare as chaves com ```cypress.env.example.json``` e preencha os valores.
 
-#### ▶️ Rodar apenas um spec (opcional)
+#### ▶️ Executar apenas um cenario (opcional)
 ```
-npx cypress run --spec "cypress/e2e/**/*.cy.*"
+npx cypress run --spec "cypress/e2e/features/login.feature"
 ```
 
